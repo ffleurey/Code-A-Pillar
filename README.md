@@ -60,3 +60,5 @@ After looking at the signals on the scope, I have written a small arduino progra
 ## References
 
 - Cutting the sound: http://anngadzikowski.com/hack-your-code-a-pillar/
+- Thread on the Raspberry Pi Forum: https://www.raspberrypi.org/forums/viewtopic.php?t=164815&p=1063335
+
