@@ -56,3 +56,7 @@ The head and the tail blocks are connected through USB connectors, this allows f
 The D-WR connection is directly connected through all the tail element, it is really a bus. However the EN pin is not connected through the blocks, it is used to be able to figure out in which order the blocks are connected on the bus.
 
 After looking at the signals on the scope, I have written a small arduino program to sniff the messages echanged on the data bus. It is not complete yet and the timing needs to be improved but a first version is in the Sniff-A-Pillar folder together with some examplainations of how it works.
+
+## References
+
+- Cutting the sound: http://anngadzikowski.com/hack-your-code-a-pillar/
