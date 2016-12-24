@@ -11,7 +11,7 @@ How does it work? How does it knows which blocks are connected? in which sequenc
 Let's find out! :-)
 
 - Draft reverse engineering of the protocol: https://github.com/ffleurey/Code-A-Pillar/blob/master/img/init/PROTOCOL.md
-- Arduino sketch to sniff the protocol (Alpha): https://github.com/ffleurey/Code-A-Pillar/tree/master/Sniff-A-Pillar
+- Arduino sketch to sniff the protocol (Alpha version): https://github.com/ffleurey/Code-A-Pillar/tree/master/Sniff-A-Pillar
 
 # Before we start: fixing the sound
 
