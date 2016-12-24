@@ -10,6 +10,9 @@ How does it work? How does it knows which blocks are connected? in which sequenc
 
 Let's find out! :-)
 
+- Draft reverse engineering of the protocol: https://github.com/ffleurey/Code-A-Pillar/blob/master/img/init/PROTOCOL.md
+- Arduino sketch to sniff the protocol (Alpha): https://github.com/ffleurey/Code-A-Pillar/tree/master/Sniff-A-Pillar
+
 # Before we start: fixing the sound
 
 Out of the box many people have complained that it is too loud. I can confirm. It did not take more than a few minutes for me to get annoyed by how loud it is. Unfortunately, there is no volume control or mute button but this is a very easy fix. 
