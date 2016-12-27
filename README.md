@@ -10,10 +10,13 @@ How does it work? How does it knows which blocks are connected? in which sequenc
 
 Let's find out! :-)
 
-- Draft reverse engineering of the protocol: https://github.com/ffleurey/Code-A-Pillar/blob/master/img/init/PROTOCOL.md
-- Arduino sketch to sniff the protocol (Alpha version): https://github.com/ffleurey/Code-A-Pillar/tree/master/Sniff-A-Pillar
+### Draft reverse engineering of the protocol: 
+https://github.com/ffleurey/Code-A-Pillar/blob/master/img/init/PROTOCOL.md
 
-# Before we start: fixing the sound
+### Arduino sketch to sniff the protocol (Alpha version): 
+https://github.com/ffleurey/Code-A-Pillar/tree/master/Sniff-A-Pillar
+
+# Fixing the sound
 
 Out of the box many people have complained that it is too loud. I can confirm. It did not take more than a few minutes for me to get annoyed by how loud it is. Unfortunately, there is no volume control or mute button but this is a very easy fix. 
 
@@ -57,6 +60,17 @@ The head and the tail blocks are connected through USB connectors, this allows f
 - EN (probably for "Enable").
 
 The D-WR connection is directly connected through all the tail element, it is really a bus. However the EN pin is not connected through the blocks, it is used to be able to figure out in which order the blocks are connected on the bus.
+
+	     HEAD             Block 1         Block 2         Block 3
+	+-------------+     +---------+     +---------+     +---------+
+	|             |     |         |     |         |     |         |
+	| +           +---------------------------------------------------- VCC (4.5V)
+	|             |---------------------------------------------------> DATA
+	|             |-------> EN1 |---------> EN2 |---------> EN3 |-----> EN4
+	| +           +---------------------------------------------------- GND
+	|             | USB |         | USB |         | USB |         |
+	+-------------+     +---------+     +---------+     +---------+
+
 
 After looking at the signals on the scope, I have written a small arduino program to sniff the messages echanged on the data bus. It is not complete yet and the timing needs to be improved but a first version is in the Sniff-A-Pillar folder together with some examplainations of how it works.
 

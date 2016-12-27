@@ -63,3 +63,24 @@ For each bit, the master pulls the bus low for about 6-10us. After that, if the 
 
 On the figure above, the data is ...00010...
 
+## Packets
+
+Commands sent by the head are composed of 28 bits: 3 bytes of payload and a 4 bits checksum.
+
+The 4-bits checksum seems to be a simple XOR for the 6 x 4 bits of the payload. This is to be verified since I have only looked at small values being sent. Here is the format of the packets:
+
+	       Byte 1              Byte 2               Byte 3         (4 bits)
+	+--------------------+-------------------+--------------------+-----------+
+	|                    |                   |                    |           |
+	|   Dest. Address    |     Command       |     Parameter?     | Checksum  |
+	|                    |                   |                    |           |
+	+--------------------+-------------------+--------------------+-----------+
+
+	    0: Broadcast       0: ???                   ???
+	                       1: DISCOVER
+	    X: Target addr.    2: PING
+	                       3: LED ON?
+	                       4: LED BLINK?
+	                       5: LED OFF?
+	                       6: ALL OFF  
+
