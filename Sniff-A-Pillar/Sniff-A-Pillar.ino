@@ -190,6 +190,7 @@ void process_packet() {
 
   if (rxbuffer_ptr == 5) { // This is a device response
     uint8_t rxchecksum = rxbuffer[0] + rxbuffer[1];
+    rxchecksum &= 0x0F;
     uint8_t chk = (rxbuffer[2] == (rxchecksum << 4))?0:1;
     received_resp(rxbuffer[0], rxbuffer[1], chk);
   }
@@ -198,7 +199,15 @@ void process_packet() {
   }
   else { // This is a master packet (or a corrupted bunch of crap)
     uint8_t rxchecksum = rxbuffer[0] + rxbuffer[1] + rxbuffer[2];
+    rxchecksum &= 0x0F;
     uint8_t chk = (rxbuffer[3] == (rxchecksum << 4))?0:1;
+    if (chk != 0) {
+      Serial.print("\nERR: ");
+      Serial.print(rxbuffer[3], HEX);
+      Serial.print(" != ");
+      Serial.println((rxchecksum << 4), HEX);
+      
+    }
     received_cmd(rxbuffer[0], rxbuffer[1], rxbuffer[2], chk);
   }
 
