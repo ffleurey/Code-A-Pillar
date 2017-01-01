@@ -128,6 +128,10 @@ void setup() {
   PORTB &= ~_BV(PB5); // LED OFF
 
   // set PD4 as output (for debug)
+  DDRD |= _BV(PD3);   // Output
+  PORTD &= ~_BV(PD3); // LOW
+
+  // set PD4 as output (for debug)
   DDRD |= _BV(PD4);   // Output
   PORTD &= ~_BV(PD4); // LOW
 
@@ -139,8 +143,9 @@ void setup() {
   TCCR2A = 0;   // Normal port operation
   TCCR2B = 0;   // Timer is stopped (set to 2 to start counting)
   TCNT2 = 0;    // Counter set to 0
-  TIMSK2 = 3;   // Enable interrupts for overflow and compare A
-  OCR2A = 80;   // 35 uS when counting from 0 with a /8 prescaling @16MHz
+  TIMSK2 = 7;   // Enable interrupts for overflow and compare A and Compare B
+  OCR2A = 18;   // 40 uS when counting from 0 with a /32 prescaling @16MHz
+  OCR2B = 125;  // 250 uS
 
   // Setup interrupts in INT0 falling edge (connected to 1 wire bus)
   DDRD &= ~_BV(PD2);   // set PD2 as input
@@ -158,8 +163,6 @@ void setup() {
 volatile uint8_t tmp_bit = 0;
 volatile uint8_t tmp_data = 0;
 volatile uint8_t bit_cpt = 0;
-
-volatile uint8_t t2_cpt = 0;
 
 volatile uint8_t isResponse = 0;
 volatile uint8_t rxbuffer[4];     // The longest packet is 3 bytes and a 4bits checksum
@@ -220,10 +223,13 @@ void reset_receiver() {
  
 // Timer0 Overflow
 ISR(TIMER2_OVF_vect)
+{   
+
+}
+
+// Timer2 CompareB (250 uS after falling edge)
+ISR(TIMER2_COMPB_vect)
 {
-    if (t2_cpt > 0) { // After 256 uSec
-      
-      
       TCCR2B = 0; // stop the timer2
       if (PIND & _BV(PD2)) { // The bus is high => it is the end of a transmission
         process_bit();
@@ -232,19 +238,12 @@ ISR(TIMER2_OVF_vect)
       else { // The bus is low => It is a reset of the bus (low for 800uS)
         process_reset();
       }
-    }
-    else {
-      t2_cpt++;
-    }
 }
 
-// Timer2 CompareA (30 uS after falling edge)
+
+// Timer2 CompareA (40 uS after falling edge)
 ISR(TIMER2_COMPA_vect)
 {
-  
-    if (t2_cpt > 0) return;
-   // PORTD ^= _BV(PD4); // toggle PD4 (Arduino PIN 4)
-
    PORTD ^= _BV(PD5); // DEBUG: toggle PD5 when reading the bit (Arduino PIN 5)
    if (PIND & _BV(PD2)) {
      tmp_bit = 3;
@@ -255,15 +254,16 @@ ISR(TIMER2_COMPA_vect)
 // Falling Edge on PB2 (PIN 2 of the arduino)
 ISR (INT0_vect)
 {
-  if (t2_cpt == 0 && TCCR2B > 0 && TCNT2 < 80) {
+  
+  if (TCCR2B > 0 && TCNT2 < 20) {
     isResponse = 1;
-    //PORTD ^= _BV(PD4); // toggle PD4 (Arduino PIN 4)
+    PORTD ^= _BV(PD3); // toggle PD3 (Arduino PIN 3) -- Ignore this edge
   }
   else {
+    
     TCCR2B = 0; // stop timer2
     TCNT2 = 0; // Reset timer2
-    t2_cpt = 0;
-    TCCR2B = 2;   // start counting with /8 prescaling (=> 0.5 usec period @16MHz)
+    TCCR2B = 3;   // start counting with /32 prescaling (=> 2 usec period @16MHz)
 
     process_bit();
     
