@@ -65,7 +65,10 @@ void loop() {
     Serial.print(rx_cmd[1], HEX);
     Serial.print(' ');
     Serial.print(rx_cmd[2], HEX);
-    if (rx_cmd[3] != 0)  Serial.print(" ERR");
+    if (rx_cmd[3] != 0)  { 
+      PORTD ^= _BV(PD4); // DEBUG: toggle PD4 when an error is detected (Arduino PIN 4)
+      Serial.print(" ERR");
+    }
     else Serial.print(" OK ");
 
     if (rx_cmd[1] == 1 && rx_cmd[3] == 0) {
@@ -87,7 +90,10 @@ void loop() {
     Serial.print(rx_resp[0], HEX);
     Serial.print(' ');
     Serial.print(rx_resp[1], HEX);
-    if (rx_resp[2] != 0)  Serial.print(" ERR");
+    if (rx_resp[2] != 0)  {
+      if (rx_resp[0] != 0xFF || rx_resp[1] != 0xFF) PORTD ^= _BV(PD4); // DEBUG: toggle PD4 when an error is detected (Arduino PIN 4) - Ignore the case FF FF which is used to detect new blocks.
+      Serial.print(" ERR");
+    }
     else Serial.print(" OK ");
 
     if (rx_resp[2] == 0) {
@@ -217,7 +223,7 @@ ISR(TIMER2_OVF_vect)
 {
     if (t2_cpt > 0) { // After 256 uSec
       
-      PORTD ^= _BV(PD5); // toggle PD5 (Arduino PIN 5)
+      
       TCCR2B = 0; // stop the timer2
       if (PIND & _BV(PD2)) { // The bus is high => it is the end of a transmission
         process_bit();
@@ -235,13 +241,15 @@ ISR(TIMER2_OVF_vect)
 // Timer2 CompareA (30 uS after falling edge)
 ISR(TIMER2_COMPA_vect)
 {
+  
     if (t2_cpt > 0) return;
    // PORTD ^= _BV(PD4); // toggle PD4 (Arduino PIN 4)
-   
-    if (PIND & _BV(PD2)) {
-      tmp_bit = 3;
-    }
-    else tmp_bit = 2;
+
+   PORTD ^= _BV(PD5); // DEBUG: toggle PD5 when reading the bit (Arduino PIN 5)
+   if (PIND & _BV(PD2)) {
+     tmp_bit = 3;
+   }
+   else tmp_bit = 2;
 }
  
 // Falling Edge on PB2 (PIN 2 of the arduino)
@@ -249,7 +257,7 @@ ISR (INT0_vect)
 {
   if (t2_cpt == 0 && TCCR2B > 0 && TCNT2 < 80) {
     isResponse = 1;
-    PORTD ^= _BV(PD4); // toggle PD4 (Arduino PIN 4)
+    //PORTD ^= _BV(PD4); // toggle PD4 (Arduino PIN 4)
   }
   else {
     TCCR2B = 0; // stop timer2
