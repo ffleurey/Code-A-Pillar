@@ -1,0 +1,379 @@
+# Dump for a run of the pillar using 4 blocks: 
+# HEAD <- LEFT <- RIGHT <- MUSIC <- FORWARD
+
+# Captured with Sniff-A-Pillar.ino
+# Arduino UNO. Code-A-Pillar Bus connected to pin 2 (INT0)
+
+
+RESET
+15329: 1 1 0 OK [ DISCOVER @1]...4 0 OK [ LEFT  ]
+15345: 2 1 0 OK [ DISCOVER @2]...2 0 OK [ RIGHT ]
+15362: 3 1 0 OK [ DISCOVER @3]...8 0 OK [ MUSIC ]
+15378: 4 1 0 OK [ DISCOVER @4]...1 0 OK [FORWARD]
+15394: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+15411: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+15427: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+15442: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+15449: 0 6 0 OK 
+15463: 0 6 0 OK 
+15476: 0 6 0 OK 
+17256: 1 3 0 OK ... ACK 
+17617: 2 3 0 OK ... ACK 
+17979: 3 3 0 OK ... ACK 
+18340: 4 3 0 OK ... ACK 
+
+RESET
+19379: 1 1 0 OK [ DISCOVER @1]...4 0 OK [ LEFT  ]
+19394: 2 1 0 OK [ DISCOVER @2]...2 0 OK [ RIGHT ]
+19410: 3 1 0 OK [ DISCOVER @3]...8 0 OK [ MUSIC ]
+19427: 4 1 0 OK [ DISCOVER @4]...1 0 OK [FORWARD]
+19443: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+19460: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+19475: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+19491: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+19508: 0 5 0 OK 
+19521: 0 5 0 OK 
+19534: 0 5 0 OK 
+22006: 1 C 0 OK ... ACK 
+22028: 1 2 0 OK [     PING @1]... ACK 
+22063: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+22131: 2 2 0 OK [     PING @2]... ACK 
+22228: 3 2 0 OK [     PING @3]... ACK 
+22326: 4 2 0 OK [     PING @4]... ACK 
+22362: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+22430: 1 2 0 OK [     PING @1]... ACK 
+22528: 2 2 0 OK [     PING @2]... ACK 
+22625: 3 2 0 OK [     PING @3]... ACK 
+22661: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+22728: 4 2 0 OK [     PING @4]... ACK 
+22827: 1 2 0 OK [     PING @1]... ACK 
+22924: 2 2 0 OK [     PING @2]... ACK 
+22960: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+23028: 3 2 0 OK [     PING @3]... ACK 
+23126: 4 2 0 OK [     PING @4]... ACK 
+23223: 1 2 0 OK [     PING @1]... ACK 
+23258: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+23326: 2 2 0 OK [     PING @2]... ACK 
+23425: 3 2 0 OK [     PING @3]... ACK 
+23522: 4 2 0 OK [     PING @4]... ACK 
+23557: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+23625: 1 2 0 OK [     PING @1]... ACK 
+23723: 2 2 0 OK [     PING @2]... ACK 
+23821: 3 2 0 OK [     PING @3]... ACK 
+23856: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+23924: 4 2 0 OK [     PING @4]... ACK 
+24022: 1 2 0 OK [     PING @1]... ACK 
+24119: 2 2 0 OK [     PING @2]... ACK 
+24155: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+24223: 3 2 0 OK [     PING @3]... ACK 
+24321: 4 2 0 OK [     PING @4]... ACK 
+24419: 1 2 0 OK [     PING @1]... ACK 
+24454: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+24522: 2 2 0 OK [     PING @2]... ACK 
+24621: 3 2 0 OK [     PING @3]... ACK 
+24718: 4 2 0 OK [     PING @4]... ACK 
+24753: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+24821: 1 2 0 OK [     PING @1]... ACK 
+24920: 2 2 0 OK [     PING @2]... ACK 
+25017: 3 2 0 OK [     PING @3]... ACK 
+25052: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+25121: 4 2 0 OK [     PING @4]... ACK 
+25219: 1 2 0 OK [     PING @1]... ACK 
+25316: 2 2 0 OK [     PING @2]... ACK 
+25351: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+25419: 3 2 0 OK [     PING @3]... ACK 
+25517: 4 2 0 OK [     PING @4]... ACK 
+25615: 1 2 0 OK [     PING @1]... ACK 
+25650: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+25718: 2 2 0 OK [     PING @2]... ACK 
+25816: 3 2 0 OK [     PING @3]... ACK 
+25913: 4 2 0 OK [     PING @4]... ACK 
+25949: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+26017: 1 2 0 OK [     PING @1]... ACK 
+26115: 2 2 0 OK [     PING @2]... ACK 
+26213: 3 2 0 OK [     PING @3]... ACK 
+26248: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+26317: 4 2 0 OK [     PING @4]... ACK 
+26415: 1 2 0 OK [     PING @1]... ACK 
+26512: 2 2 0 OK [     PING @2]... ACK 
+26548: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+26578: 1 3 0 OK ... ACK 
+26583: 2 3 0 OK ... ACK 
+26587: 3 3 0 OK ... ACK 
+26591: 4 3 0 OK ... ACK 
+26605: 2 C 0 OK ... ACK 
+26626: 1 2 0 OK [     PING @1]... ACK 
+26661: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+26730: 2 2 0 OK [     PING @2]... ACK 
+26827: 3 2 0 OK [     PING @3]... ACK 
+26926: 4 2 0 OK [     PING @4]... ACK 
+26960: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+27029: 1 2 0 OK [     PING @1]... ACK 
+27127: 2 2 0 OK [     PING @2]... ACK 
+27225: 3 2 0 OK [     PING @3]... ACK 
+27260: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+27330: 4 2 0 OK [     PING @4]... ACK 
+27427: 1 2 0 OK [     PING @1]... ACK 
+27525: 2 2 0 OK [     PING @2]... ACK 
+27560: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+27628: 3 2 0 OK [     PING @3]... ACK 
+27726: 4 2 0 OK [     PING @4]... ACK 
+27824: 1 2 0 OK [     PING @1]... ACK 
+27858: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+27927: 2 2 0 OK [     PING @2]... ACK 
+28024: 3 2 0 OK [     PING @3]... ACK 
+28123: 4 2 0 OK [     PING @4]... ACK 
+28157: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+28226: 1 2 0 OK [     PING @1]... ACK 
+28323: 2 2 0 OK [     PING @2]... ACK 
+28422: 3 2 0 OK [     PING @3]... ACK 
+28456: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+28525: 4 2 0 OK [     PING @4]... ACK 
+28623: 1 2 0 OK [     PING @1]... ACK 
+28721: 2 2 0 OK [     PING @2]... ACK 
+28756: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+28825: 3 2 0 OK [     PING @3]... ACK 
+28922: 4 2 0 OK [     PING @4]... ACK 
+29020: 1 2 0 OK [     PING @1]... ACK 
+29054: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+29123: 2 2 0 OK [     PING @2]... ACK 
+29221: 3 2 0 OK [     PING @3]... ACK 
+29319: 4 2 0 OK [     PING @4]... ACK 
+29353: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+29422: 1 2 0 OK [     PING @1]... ACK 
+29519: 2 2 0 OK [     PING @2]... ACK 
+29618: 3 2 0 OK [     PING @3]... ACK 
+29652: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+29721: 4 2 0 OK [     PING @4]... ACK 
+29818: 1 2 0 OK [     PING @1]... ACK 
+29917: 2 2 0 OK [     PING @2]... ACK 
+29952: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+30020: 3 2 0 OK [     PING @3]... ACK 
+30117: 4 2 0 OK [     PING @4]... ACK 
+30215: 1 2 0 OK [     PING @1]... ACK 
+30251: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+30319: 2 2 0 OK [     PING @2]... ACK 
+30412: 1 3 0 OK ... ACK 
+ NOACK 
+ ACK 
+30420: 3 3 0 OK ... ACK 
+30424: 4 3 0 OK ... ACK 
+30438: 3 C 0 OK ... ACK 
+30458: 1 2 0 OK [     PING @1]... ACK 
+30493: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+30561: 2 2 0 OK [     PING @2]... ACK 
+30658: 3 2 0 OK [     PING @3]... ACK 
+30755: 4 2 0 OK [     PING @4]... ACK 
+30790: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+30858: 1 2 0 OK [     PING @1]... ACK 
+30955: 2 2 0 OK [     PING @2]... ACK 
+31051: 3 2 0 OK [     PING @3]... ACK 
+31086: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+31154: 4 2 0 OK [     PING @4]... ACK 
+31251: 1 2 0 OK [     PING @1]... ACK 
+31348: 2 2 0 OK [     PING @2]... ACK 
+31383: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+31451: 3 2 0 OK [     PING @3]... ACK 
+31548: 4 2 0 OK [     PING @4]... ACK 
+31645: 1 2 0 OK [     PING @1]... ACK 
+31679: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+31748: 2 2 0 OK [     PING @2]... ACK 
+31845: 3 2 0 OK [     PING @3]... ACK 
+31942: 4 2 0 OK [     PING @4]... ACK 
+31977: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+32045: 1 2 0 OK [     PING @1]... ACK 
+32142: 2 2 0 OK [     PING @2]... ACK 
+32239: 3 2 0 OK [     PING @3]... ACK 
+32273: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+32340: 4 2 0 OK [     PING @4]... ACK 
+32438: 1 2 0 OK [     PING @1]... ACK 
+32535: 2 2 0 OK [     PING @2]... ACK 
+32570: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+32637: 3 2 0 OK [     PING @3]... ACK 
+32735: 4 2 0 OK [     PING @4]... ACK 
+32832: 1 2 0 OK [     PING @1]... ACK 
+32866: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+32934: 2 2 0 OK [     PING @2]... ACK 
+33031: 3 2 0 OK [     PING @3]... ACK 
+33128: 4 2 0 OK [     PING @4]... ACK 
+33163: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+33231: 1 2 0 OK [     PING @1]... ACK 
+33328: 2 2 0 OK [     PING @2]... ACK 
+33425: 3 2 0 OK [     PING @3]... ACK 
+33460: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+33527: 4 2 0 OK [     PING @4]... ACK 
+33625: 1 2 0 OK [     PING @1]... ACK 
+33722: 2 2 0 OK [     PING @2]... ACK 
+33757: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+33824: 3 2 0 OK [     PING @3]... ACK 
+33922: 4 2 0 OK [     PING @4]... ACK 
+34019: 1 2 0 OK [     PING @1]... ACK 
+34053: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+34121: 2 2 0 OK [     PING @2]... ACK 
+34217: 3 2 0 OK [     PING @3]... ACK 
+34315: 4 2 0 OK [     PING @4]... ACK 
+34350: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+34417: 1 2 0 OK [     PING @1]... ACK 
+34514: 2 2 0 OK [     PING @2]... ACK 
+34612: 3 2 0 OK [     PING @3]... ACK 
+34647: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+34713: 4 2 0 OK [     PING @4]... ACK 
+34810: 1 2 0 OK [     PING @1]... ACK 
+34908: 2 2 0 OK [     PING @2]... ACK 
+34942: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+35010: 3 2 0 OK [     PING @3]... ACK 
+35107: 4 2 0 OK [     PING @4]... ACK 
+35205: 1 2 0 OK [     PING @1]... ACK 
+35239: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+35307: 2 2 0 OK [     PING @2]... ACK 
+35404: 3 2 0 OK [     PING @3]... ACK 
+35501: 4 2 0 OK [     PING @4]... ACK 
+35535: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+35604: 1 2 0 OK [     PING @1]... ACK 
+35700: 2 2 0 OK [     PING @2]... ACK 
+35798: 3 2 0 OK [     PING @3]... ACK 
+35832: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+35900: 4 2 0 OK [     PING @4]... ACK 
+35997: 1 2 0 OK [     PING @1]... ACK 
+36094: 2 2 0 OK [     PING @2]... ACK 
+36129: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+36197: 3 2 0 OK [     PING @3]... ACK 
+36294: 4 2 0 OK [     PING @4]... ACK 
+36391: 1 2 0 OK [     PING @1]... ACK 
+36425: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+36493: 2 2 0 OK [     PING @2]... ACK 
+36590: 3 2 0 OK [     PING @3]... ACK 
+36687: 4 2 0 OK [     PING @4]... ACK 
+36722: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+36790: 1 2 0 OK [     PING @1]... ACK 
+36887: 2 2 0 OK [     PING @2]... ACK 
+36983: 3 2 0 OK [     PING @3]... ACK 
+37019: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+37087: 4 2 0 OK [     PING @4]... ACK 
+37183: 1 2 0 OK [     PING @1]... ACK 
+37280: 2 2 0 OK [     PING @2]... ACK 
+37315: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+37383: 3 2 0 OK [     PING @3]... ACK 
+37480: 4 2 0 OK [     PING @4]... ACK 
+37577: 1 2 0 OK [     PING @1]... ACK 
+37612: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+37680: 2 2 0 OK [     PING @2]... ACK 
+37777: 3 2 0 OK [     PING @3]... ACK 
+37874: 4 2 0 OK [     PING @4]... ACK 
+37908: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+37977: 1 2 0 OK [     PING @1]... ACK 
+38074: 2 2 0 OK [     PING @2]... ACK 
+38170: 3 2 0 OK [     PING @3]... ACK 
+38205: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+38273: 4 2 0 OK [     PING @4]... ACK 
+38370: 1 2 0 OK [     PING @1]... ACK 
+38467: 2 2 0 OK [     PING @2]... ACK 
+38502: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+38569: 3 2 0 OK [     PING @3]... ACK 
+38652: 1 3 0 OK ... ACK 
+38656: 2 3 0 OK ... ACK 
+38660: 3 3 0 OK ... ACK 
+38664: 4 3 0 OK ... ACK 
+38678: 4 C 0 OK ... ACK 
+38699: 1 2 0 OK [     PING @1]... ACK 
+38733: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+38802: 2 2 0 OK [     PING @2]... ACK 
+38900: 3 2 0 OK [     PING @3]... ACK 
+38998: 4 2 0 OK [     PING @4]... ACK 
+39032: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+39101: 1 2 0 OK [     PING @1]... ACK 
+39198: 2 2 0 OK [     PING @2]... ACK 
+39297: 3 2 0 OK [     PING @3]... ACK 
+39331: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+39400: 4 2 0 OK [     PING @4]... ACK 
+39497: 1 2 0 OK [     PING @1]... ACK 
+39595: 2 2 0 OK [     PING @2]... ACK 
+39630: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+39699: 3 2 0 OK [     PING @3]... ACK 
+39796: 4 2 0 OK [     PING @4]... ACK 
+39894: 1 2 0 OK [     PING @1]... ACK 
+39928: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+39997: 2 2 0 OK [     PING @2]... ACK 
+40094: 3 2 0 OK [     PING @3]... ACK 
+40193: 4 2 0 OK [     PING @4]... ACK 
+40227: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+40296: 1 2 0 OK [     PING @1]... ACK 
+40393: 2 2 0 OK [     PING @2]... ACK 
+40491: 3 2 0 OK [     PING @3]... ACK 
+40526: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+40595: 4 2 0 OK [     PING @4]... ACK 
+40692: 1 2 0 OK [     PING @1]... ACK 
+40790: 2 2 0 OK [     PING @2]... ACK 
+40825: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+40893: 3 2 0 OK [     PING @3]... ACK 
+40991: 4 2 0 OK [     PING @4]... ACK 
+41089: 1 2 0 OK [     PING @1]... ACK 
+41123: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+41193: 2 2 0 OK [     PING @2]... ACK 
+41290: 3 2 0 OK [     PING @3]... ACK 
+41388: 4 2 0 OK [     PING @4]... ACK 
+41423: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+41491: 1 2 0 OK [     PING @1]... ACK 
+41589: 2 2 0 OK [     PING @2]... ACK 
+41687: 3 2 0 OK [     PING @3]... ACK 
+41721: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+41790: 4 2 0 OK [     PING @4]... ACK 
+41887: 1 2 0 OK [     PING @1]... ACK 
+41986: 2 2 0 OK [     PING @2]... ACK 
+42020: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+42090: 3 2 0 OK [     PING @3]... ACK 
+42187: 4 2 0 OK [     PING @4]... ACK 
+42285: 1 2 0 OK [     PING @1]... ACK 
+42319: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+42388: 2 2 0 OK [     PING @2]... ACK 
+42485: 3 2 0 OK [     PING @3]... ACK 
+42584: 4 2 0 OK [     PING @4]... ACK 
+42618: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+42688: 1 2 0 OK [     PING @1]... ACK 
+42785: 2 2 0 OK [     PING @2]... ACK 
+42883: 3 2 0 OK [     PING @3]... ACK 
+42917: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+42987: 4 2 0 OK [     PING @4]... ACK 
+43084: 1 2 0 OK [     PING @1]... ACK 
+43182: 2 2 0 OK [     PING @2]... ACK 
+43217: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+43286: 3 2 0 OK [     PING @3]... ACK 
+43383: 4 2 0 OK [     PING @4]... ACK 
+43482: 1 2 0 OK [     PING @1]... ACK 
+43516: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+43585: 2 2 0 OK [     PING @2]... ACK 
+43682: 3 2 0 OK [     PING @3]... ACK 
+43780: 4 2 0 OK [     PING @4]... ACK 
+43815: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+43884: 1 2 0 OK [     PING @1]... ACK 
+43981: 2 2 0 OK [     PING @2]... ACK 
+44079: 3 2 0 OK [     PING @3]... ACK 
+44113: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+44182: 4 2 0 OK [     PING @4]... ACK 
+44187: 1 3 0 OK ... ACK 
+44190: 2 3 0 OK ... ACK 
+44194: 3 3 0 OK ... ACK 
+44198: 4 3 0 OK ... ACK 
+44457: 1 C 0 OK ... ACK 
+44472: 2 C 0 OK ... ACK 
+44486: 3 C 0 OK ... ACK 
+44500: 4 C 0 OK ... ACK 
+52736: 1 3 0 OK ... ACK 
+52750: 2 3 0 OK ... ACK 
+52764: 3 3 0 OK ... ACK 
+52779: 4 3 0 OK ... ACK 
+
+RESET
+52947: 1 1 0 OK [ DISCOVER @1]...4 0 OK [ LEFT  ]
+52964: 2 1 0 OK [ DISCOVER @2]...2 0 OK [ RIGHT ]
+52979: 3 1 0 OK [ DISCOVER @3]...8 0 OK [ MUSIC ]
+52996: 4 1 0 OK [ DISCOVER @4]...1 0 OK [FORWARD]
+53011: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+53027: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+53044: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+53060: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+53097: 1 2 0 OK [     PING @1]... ACK 
+53132: 5 1 0 OK [ DISCOVER @5]...FF FF ERR
+53198: 2 2 0 OK [     PING @2]... ACK 
+53296: 3 2 0 OK [     PING @3]... ACK 
+

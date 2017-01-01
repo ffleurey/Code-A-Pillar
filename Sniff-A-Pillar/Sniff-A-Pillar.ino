@@ -60,6 +60,8 @@ void loop() {
 
   if (rx_cmd_rdy) {
     rx_cmd_rdy = 0;
+    Serial.print(millis());
+    Serial.print(": ");
     Serial.print(rx_cmd[0], HEX);
     Serial.print(' ');
     Serial.print(rx_cmd[1], HEX);
