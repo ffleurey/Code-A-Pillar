@@ -81,8 +81,10 @@ void loop() {
       Serial.print(rx_cmd[0], HEX);
       Serial.print("]");
     }
-    
-    Serial.print(" - ");
+    if (rx_cmd[0] == 0) { // It is a broadcast
+      Serial.println();
+    }
+    else Serial.print("..."); // It is a unicast, there should be a response or an ack
   }
 
   if (rx_resp_rdy) {
@@ -201,13 +203,13 @@ void process_packet() {
     uint8_t rxchecksum = rxbuffer[0] + rxbuffer[1] + rxbuffer[2];
     rxchecksum &= 0x0F;
     uint8_t chk = (rxbuffer[3] == (rxchecksum << 4))?0:1;
-    if (chk != 0) {
-      Serial.print("\nERR: ");
-      Serial.print(rxbuffer[3], HEX);
-      Serial.print(" != ");
-      Serial.println((rxchecksum << 4), HEX);
-      
-    }
+//    if (chk != 0) {
+//      Serial.print("\nERR: ");
+//      Serial.print(rxbuffer[3], HEX);
+//      Serial.print(" != ");
+//      Serial.println((rxchecksum << 4), HEX);
+//      
+//    }
     received_cmd(rxbuffer[0], rxbuffer[1], rxbuffer[2], chk);
   }
 
