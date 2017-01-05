@@ -13,8 +13,14 @@ Let's find out! :-)
 ### Draft reverse engineering of the protocol: 
 https://github.com/ffleurey/Code-A-Pillar/blob/master/img/init/PROTOCOL.md
 
-### Arduino sketch to sniff the protocol (Alpha version): 
+### Arduino sketch to sniff the protocol: 
 https://github.com/ffleurey/Code-A-Pillar/tree/master/Sniff-A-Pillar
+
+### Arduino sketch to control the tail blocks:
+https://github.com/ffleurey/Code-A-Pillar/tree/master/Flash-A-Pillar
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=aNHJMacFLYw" target="_blank"><img src="http://img.youtube.com/vi/aNHJMacFLYw/0.jpg" 
+alt="youtube video" width="320" height="240" border="10" /></a>
 
 # Fixing the sound
 
