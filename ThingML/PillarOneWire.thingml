@@ -1,0 +1,242 @@
+import "_Datatypes.thingml"
+
+thing fragment TimerMsgs {
+	message timer_start(id : UInt8, time : UInt32) @timer_start "true";
+	message timer_cancel(id : UInt8) @timer_cancel "true";
+	message timer_timeout(id : UInt8) @timeout "true";
+}
+
+thing fragment PillarOneWireMsgs {
+	message pillar_reset()
+	message pillar_command(addr : UInt8, cmd0 : UInt8, cmd1 : UInt8, csum : UInt8)
+	message pillar_command_with_ack(addr : UInt8, cmd0 : UInt8, cmd1 : UInt8, csum : UInt8, ack : UInt8)
+	message pillar_command_with_response(addr : UInt8, cmd0 : UInt8, cmd1 : UInt8, csum : UInt8, rsp0 : UInt8, rsp1 : UInt8, rsum : UInt8)
+	message pillar_error();
+}
+
+thing PillarOneWireLogger includes PillarOneWireMsgs {
+
+	required port onewire {
+		receives pillar_reset, pillar_command, pillar_command_with_ack, pillar_command_with_response, pillar_error
+	}
+	
+	statechart PillarOneWireLoggerSC init Logging {
+	
+		on entry 'Serial.begin(115200);
+					Serial.println("READY");'
+	
+		state Logging {
+		
+			internal event m:onewire?pillar_reset action 'Serial.println("RESET");'
+			
+			internal event m:onewire?pillar_command action do
+				'Serial.print('&m.addr&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.cmd0&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.cmd1&',HEX);' 'Serial.print(" S");'
+				'Serial.print('&m.csum&',HEX);'
+				'Serial.println();'
+			end
+			internal event m:onewire?pillar_command_with_response action do
+				'Serial.print('&m.addr&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.cmd0&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.cmd1&',HEX);' 'Serial.print(" S");'
+				'Serial.print('&m.csum&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.rsp0&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.rsp1&',HEX);' 'Serial.print(" S");'
+				'Serial.print('&m.rsum&',HEX);'
+				'Serial.println();'
+			end
+			internal event m:onewire?pillar_command_with_ack action do
+				'Serial.print('&m.addr&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.cmd0&',HEX);' 'Serial.print(" ");'
+				'Serial.print('&m.cmd1&',HEX);' 'Serial.print(" S");'
+				'Serial.print('&m.csum&',HEX);' 'Serial.print(" A");'
+				'Serial.print('&m.ack&',HEX);' 
+				'Serial.println();'
+			end
+			
+			internal event m:onewire?pillar_error action 'Serial.println("ERROR");'
+		}
+	}
+}
+
+thing PillarOneWire includes TimerMsgs, PillarOneWireMsgs
+@c_header ""
+@c_global "struct PillarOneWire_Instance *_pillar_instance;"
+{
+	
+	required port clock {
+		receives timer_timeout
+		sends timer_start, timer_cancel
+	}
+	
+	provided port onewire {
+		sends pillar_reset, pillar_command, pillar_command_with_ack, pillar_command_with_response, pillar_error
+	}
+	
+	property rxbuffer : UInt8[6]
+	property rxindex : UInt8
+	
+	
+	function timer2_initialize() do
+		'TCCR2A = 0;'  // Normal port operation
+		'TCCR2B = 0;'  // Timer is stopped (set to 2 to start counting)
+		'TIMSK2 = 7;'  // Enable interrupts for overflow, compare A and Compare B
+		'OCR2A = 7;'   // 40 uS when counting from 0 with a /64 prescaling @16MHz
+		'OCR2B = 62;'  // 250 uS'
+	end
+	
+	function reset_rxbuffer() do
+		var i : UInt8 = 0
+		while (i<6) do 
+			rxbuffer[i] = 0 
+			i = i+1 end
+		rxindex = 0
+	end
+	
+	function timer2_start() 'TCNT2 = 0; TCCR2B = 4;'   // start counting with /64 prescaling (=> 4 usec period @16MHz)
+	
+	function timer2_stop()  'TCCR2B = 0;'
+	
+	function timer2_interrupt_compare_A() // Store 1 bit in the rx buffer
+	@c_prototype "ISR(TIMER2_COMPA_vect)"
+	@c_instance_var_name "_pillar_instance"
+	do
+		'PORTD ^= _BV(PD4);' // DEBUG: toggle PD4 when reading the bit (Arduino PIN 4)
+		if ('PIND & _BV(PD2)') ''&rxbuffer&'['&rxindex / 8&'] |= 1 << (7 - ('&rxindex % 8&'));'
+		rxindex = rxindex + 1
+	end
+	
+	function timer2_interrupt_compare_B() 
+	@c_prototype "ISR(TIMER2_COMPB_vect)"
+	@c_instance_var_name "_pillar_instance"
+	do
+		'PORTB ^= _BV(PB1);'
+		if (not 'PIND & _BV(PD2)') do // If the bus is low, it is a reset.
+			timer2_stop()
+			onewire!pillar_reset()
+			reset_rxbuffer()
+		end
+	end
+	
+	function timer2_interrupt_overflow() // A complete packet has been received
+	@c_prototype "ISR(TIMER2_OVF_vect)"
+	@c_instance_var_name "_pillar_instance"
+	do
+		  'PORTB ^= _BV(PB0);'
+		  timer2_stop()
+		  
+		  if (rxbuffer[0]>16) 'PORTD ^= _BV(PD6);' // ERROR: toggle PD5 when reading the bit (Arduino PIN 5)
+		  
+		  if (rxindex == 28) do	// It is just a command
+		  	onewire!pillar_command(rxbuffer[0], rxbuffer[1], rxbuffer[2], rxbuffer[3]/16)
+		  end
+		  else if (rxindex == 29) do // It is a command with and ack
+		  	onewire!pillar_command_with_ack(rxbuffer[0], rxbuffer[1], rxbuffer[2], rxbuffer[3]/16, '(0x08 & '&rxbuffer[3]&') >> 3')
+		  end
+		  else if (rxindex == 48) do // It is a command with a response
+		  	onewire!pillar_command_with_response(rxbuffer[0], rxbuffer[1], rxbuffer[2], rxbuffer[3]/16, rxbuffer[3]*16 + rxbuffer[4]/16, rxbuffer[4]*16 + rxbuffer[5]/16, '0x0F & '&rxbuffer[5]&'')
+		  end
+		  else do 
+		  	'PORTD ^= _BV(PD6);' // DEBUG: toggle PD5 when reading the bit (Arduino PIN 5)
+		  	onewire!pillar_error()
+		  end
+		  reset_rxbuffer()
+	end
+	
+	function int0_initialize() do
+		 // Setup interrupts in INT0 falling edge (connected to 1 wire bus)
+	  'DDRD &= ~_BV(PD2);'   // set PD2 as input
+	  'PORTD &= ~_BV(PD2);'  // no pullup
+	  'EICRA = 0x02;'        // set INT0 to trigger on falling edge
+	  'EIMSK = 0x01;'        // Turns on INT0
+	end
+	
+	function int0_interrupt_falling() 
+	@c_prototype "ISR (INT0_vect)"
+	@c_instance_var_name "_pillar_instance"
+	do
+		'PORTD ^= _BV(PD5);' // DEBUG: toggle PD5 when reading the bit (Arduino PIN 5)
+		if ('TCCR2B > 0 && TCNT2 < 14') do
+			// Ignore
+			'PORTD ^= _BV(PD7);' // DEBUG: toggle PD5 when reading the bit (Arduino PIN 5)
+		end
+		else do
+			timer2_stop()
+			timer2_start()
+		end
+	end
+	
+	function initialize() do
+		timer2_initialize()
+		int0_initialize()
+		reset_rxbuffer()
+	  '// set PB5 led as output and OFF (pin 13)
+	  DDRB |= _BV(PB5);   // Output
+	  PORTB &= ~_BV(PB5); // LED OFF
+	
+	  // set PD3 as output
+	  DDRD |= _BV(PD3);   // Output
+	  PORTD &= ~_BV(PD3); // LOW
+	
+	  // set PD4 as output (for debug)
+	  DDRD |= _BV(PD4);   // Output
+	  PORTD &= ~_BV(PD4); // LOW
+	
+	  // set PD5 as output (for debug)
+	  DDRD |= _BV(PD5);   // Output
+	  PORTD &= ~_BV(PD5); // LOW
+	  
+	  // set PD6 as output (for debug)
+	  DDRD |= _BV(PD6);   // Output
+	  PORTD &= ~_BV(PD6); // LOW
+	  
+	  // set PD7 as output (for debug)
+	  DDRD |= _BV(PD7);   // Output
+	  PORTD &= ~_BV(PD7); // LOW
+	  
+	  // set PB0 as output (for debug)
+	  DDRB |= _BV(PB0);   // Output
+	  PORTB &= ~_BV(PB0); // LOW
+	  
+	  // set PB1 as output (for debug)
+	  DDRB |= _BV(PB1);   // Output
+	  PORTB &= ~_BV(PB1); // LOW
+	
+	  sei();'
+	end
+
+	statechart PillarOneWireSC init Idle {
+	
+		on entry do
+			'_pillar_instance = _instance;'
+			'pinMode(13, OUTPUT);'
+			initialize()
+		end
+		
+		state Idle {
+			on entry clock!timer_start(0,500)
+			transition -> Blink event clock?timer_timeout
+		}
+		
+		state Blink {
+			on entry do 
+				'digitalWrite(13, HIGH);'
+				clock!timer_start(0,250)
+			end
+			on exit 'digitalWrite(13, LOW);'
+			transition -> Idle event clock?timer_timeout
+		}
+		
+	}
+}
+
+protocol Timer;
+
+configuration PillarOneWireTest {
+	instance pillar : PillarOneWire
+	instance logger : PillarOneWireLogger
+	connector logger.onewire => pillar.onewire
+	connector pillar.clock over Timer
+		@hardware_timer "0"
+}

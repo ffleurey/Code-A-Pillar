@@ -234,7 +234,7 @@ void reset_receiver() {
   rxbuffer[0] = 0;
 }
  
-// Timer0 Overflow
+// Timer2 Overflow
 ISR(TIMER2_OVF_vect)
 {   
 
